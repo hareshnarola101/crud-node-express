@@ -4,7 +4,7 @@
   "description": "Develop a RESTful API using Node.js for managing books.",
   "main": "server.js",
   "scripts": {
-    "test": "start"
+    "start": "nodemon server"
   },
   "author": "",
   "license": "ISC",
