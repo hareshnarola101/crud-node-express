@@ -14,7 +14,8 @@ app.use(bodyParser.json())
 mongoose.Promise = global.Promise;
 
 mongoose.connect(dbConfig.url, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 }).then(() => {
     console.log("Databse Connected Successfully!!");    
 }).catch(err => {

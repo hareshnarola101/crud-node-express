@@ -1,22 +1,24 @@
-const Book = require('../model/Book'); // Import the Book model
+const Book = require('../models/Book'); // Import the Book model
 
 // Controller methods for managing books
 const createBook = async (req, res) => {
   try {
     const { title, author, summary } = req.body;
-
+    console.log(title,author,summary);
+    
     if (!title && !author && !summary) {
+        
         res.status(400).send({ message: "Content can not be empty!" });
     }
-
+    
     const newBook = new Book({ title, author, summary });
     const savedBook = await newBook.save();
 
-
+    
 
     res.json({
         message: "Book created successfully!",
-        savedBook
+        data: savedBook
     });
     
   } catch (error) {
@@ -27,7 +29,10 @@ const createBook = async (req, res) => {
 const getAllBooks = async (req, res) => {
   try {
     const books = await Book.find();
-    res.json(books);
+    res.json({
+        message: "List of all books",
+        data: books
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -39,7 +44,10 @@ const getBookById = async (req, res) => {
     if (!book) {
       return res.status(404).json({ error: 'Book not found' });
     }
-    res.json(book);
+    res.json({
+        message: "details of a specific book",
+        data: book
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -64,7 +72,7 @@ const updateBook = async (req, res) => {
     }else {
         res.json({
             message: "Book updated successfully.",
-            updatedBook});
+            data: updatedBook});
     }
     
   } catch (error) {
