@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');
+const bookRoute = require('./app/routes/Book');
 
 
 const app = express();
@@ -23,9 +24,7 @@ mongoose.connect(dbConfig.url, {
 
 
 
-app.get('/', (req, res) => {
-    res.json({"message": "Hello Crud Node Express"});
-});
+app.use('/books', bookRoute);
 
 app.listen(3000, () => {
     console.log("Server is listening on port 3000");
